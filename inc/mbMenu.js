@@ -39,7 +39,7 @@ if (!jQuery.browser) {
 	$.mbMenu = {
 		name:"mbMenu",
 		author:"Matteo Bicocchi",
-		version:"2.9.7",
+		version:"2.9.7_jypark",
 		actualMenuOpener:false,
 		options: {
 			template:"yourMenuVoiceTemplate",// the url that returns the menu voices via ajax. the data passed in the request is the "menu" attribute value as "menuId"
@@ -49,6 +49,7 @@ if (!jQuery.browser) {
 			openOnRight:false,
 			containment:"window",
 			iconPath:"ico/",
+			iframeMode:false,
 			hasImages:true,
 			fadeInTime:100,
 			fadeOutTime:200,
@@ -283,6 +284,10 @@ if (!jQuery.browser) {
 
 			where.append("<div class='menuDiv'><div class='"+menuClass+" '></div></div>");
 			this.menu  = where.find(".menuDiv");
+			if(op.options.iframeMode){
+				$(this.menu).append("<iframe class='menuIfrm' style='width:0;height:0;border:none;'></iframe>");
+				this.ifrm = this.menu .find(".menuIfrm");
+			}
 			$(this.menu).css({width:0, height:0});
 			if (op.options.minZindex!="auto"){
 				$(this.menu).css({zIndex:op.options.minZindex++});
@@ -290,7 +295,7 @@ if (!jQuery.browser) {
 				$(this.menu).mb_bringToFront();
 			}
 			this.menuContainer  = $(this.menu).find(op.options.menuSelector);
-
+			
 			$(this.menuContainer).on(mouseOver,function(){
 				$(opener).addClass("selected");
 			});
@@ -547,6 +552,7 @@ if (!jQuery.browser) {
 				top:t,
 				left:l
 			});
+			if(op.options.iframeMode)$(this.ifrm).css({width:mw,height:mh});
 		},
 
 		removeMbMenu: function(op,fade){
