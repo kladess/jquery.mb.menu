@@ -45,7 +45,7 @@ if (!jQuery.browser) {
 			template:"yourMenuVoiceTemplate",// the url that returns the menu voices via ajax. the data passed in the request is the "menu" attribute value as "menuId"
 			additionalData:"",
 			menuSelector:".menuContainer",
-			menuWidth:400,
+			menuWidth:440,
 			openOnRight:false,
 			containment:"window",
 			iconPath:"ico/",
